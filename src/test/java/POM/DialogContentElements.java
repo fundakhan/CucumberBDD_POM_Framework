@@ -1,5 +1,6 @@
 package POM;
 
+import Utils.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,11 +9,12 @@ import org.testng.Assert;
 
 public class DialogContentElements extends BasePOM{
 
-    public  DialogContentElements(){
+    public DialogContentElements(){
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy(xpath = "//ms-add-button[@tooltip='COUNTRY.TITLE.ADD']")
+
+    @FindBy(xpath = "//ms-add-button[contains(@tooltip,'TITLE.ADD')]//button")
     private WebElement addButton;
 
     @FindBy(xpath = "//ms-text-field[@formcontrolname='name']//input")
@@ -21,7 +23,7 @@ public class DialogContentElements extends BasePOM{
     @FindBy(xpath = "//ms-text-field[@formcontrolname='code']//input")
     private WebElement codeInput;
 
-    @FindBy(xpath = "//ms-save-button[@class='ng-star-inserted']") // //ms-save-button//button
+    @FindBy(xpath = "//ms-save-button//button")
     private WebElement saveButton;
 
     @FindBy(xpath = "//ms-text-field[contains(@placeholder, 'FIELD.NAME')]//input")
@@ -30,11 +32,11 @@ public class DialogContentElements extends BasePOM{
     @FindBy(xpath = "//ms-search-button//button")
     private WebElement searchButton;
 
-    @FindBy(xpath = "(//td[@role='cell'])[2]")
-    private WebElement countryBtn;
+    @FindBy(xpath = "//ms-edit-button//button")
+    private WebElement editButton;
 
     @FindBy(xpath = "//ms-delete-button//button")
-    private WebElement deleteButton;
+    private WebElement trashBtn;
 
     @FindBy(xpath = "//button[@type='submit']//span[text()=' Delete ']")
     private WebElement deleteBtnTwo;
@@ -42,10 +44,27 @@ public class DialogContentElements extends BasePOM{
     @FindBy(xpath = "//div[contains(text(), 'successfully')]")
     private WebElement successMessage;
 
+    @FindBy(xpath = "//ms-text-field[@formcontrolname='shortName']//input")
+    private WebElement shortName;
+
+    @FindBy(xpath = "//div[contains(text(),'already exist')]")
+    private WebElement alreadyExist;
+
+    @FindBy(xpath = "//ms-text-field[contains(@placeholder, 'FIELD.INTEGRATION_CODE')]//input")
+    private WebElement integrationCode;
+
+    @FindBy(xpath = "//ms-integer-field[@formcontrolname='priority']//input")
+    private WebElement priorityInput;
+
+
+
     private String country = "America";
     private String code = "USA";
     private String editCountry = "Cuba";
     private String editCode = "Cb";
+
+
+
 
     public void userCreateNewCountry(){
 
@@ -55,15 +74,18 @@ public class DialogContentElements extends BasePOM{
         saveButton.click();
     }
 
-    public void validateCountrySuccessfullyMessage(){
+    public void validateSuccessfullyMessage(){
         wait.until(ExpectedConditions.visibilityOf(successMessage));
         Assert.assertTrue(successMessage.getText().contains("success".toLowerCase()));
+
+//        wait.until(ExpectedConditions.visibilityOf(alreadyExist));
+//        Assert.assertTrue(alreadyExist.getText().contains("already exists".toLowerCase()));
     }
 
     public void userEditCountry(){
         searchInput.sendKeys(country);
         searchButton.click();
-        countryBtn.click();
+        editButton.click();
         nameInput.clear();
         nameInput.sendKeys(editCountry);
         codeInput.clear();
@@ -75,9 +97,73 @@ public class DialogContentElements extends BasePOM{
     public void userDeleteCountry(){
 
         searchInput.sendKeys(editCountry);
-        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
-        wait.until(ExpectedConditions.visibilityOf(deleteButton)).click();
+        waitUntilVisibleAndClickableThenClick(searchButton);
+        waitUntilVisibleAndClickableThenClick(trashBtn);
         deleteBtnTwo.click();
+    }
+
+    public void createCitizenship(String name, String shortNamee){
+
+        addButton.click();
+        nameInput.sendKeys(name);
+        shortName.sendKeys(shortNamee);
+        saveButton.click();
+    }
+
+    public void editCitizenship(String name, String updateName){
+
+        searchInput.sendKeys(name);
+        searchButton.click();
+        editButton.click();
+        nameInput.clear();
+        nameInput.sendKeys(updateName);
+        shortName.clear();
+        saveButton.click();
+
+    }
+
+    public void deleteCitizenship(String updateName){
+
+        searchInput.sendKeys(updateName);
+        searchButton.click();
+        waitUntilVisibleAndClickableThenClick(trashBtn);
+        waitUntilVisibleAndClickableThenClick(deleteBtnTwo);
+
+    }
+
+    public void  createFee(String feeName, String feeCode, String intCode,String priority){
+
+        addButton.click();
+        nameInput.sendKeys(feeName);
+        codeInput.sendKeys(feeCode);
+        integrationCode.sendKeys(intCode);
+        priorityInput.clear();
+        priorityInput.sendKeys(priority);
+        saveButton.click();
+
+    }
+
+    public void editFee(String existingFeeName, String newFeeName){
+
+        searchInput.sendKeys(existingFeeName);
+        searchButton.click();
+        editButton.click();
+        nameInput.clear();
+        nameInput.sendKeys(newFeeName);
+        waitUntilVisibleAndClickableThenClick(saveButton);
+
+    }
+
+    public void deleteFee(String FeeName){
+
+        searchInput.sendKeys(FeeName);
+        searchButton.click();
+        Driver.wait(3);
+        waitUntilVisibleAndClickableThenClick(trashBtn);
+        waitUntilVisibleAndClickableThenClick(deleteBtnTwo);
+
+
+
     }
 
 

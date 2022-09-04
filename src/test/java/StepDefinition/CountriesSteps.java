@@ -45,7 +45,9 @@ public class CountriesSteps {
     public void success_message_should_be_displayed() {
 
         dialogContentElements = new DialogContentElements();
-        dialogContentElements.validateCountrySuccessfullyMessage();
+        dialogContentElements.validateSuccessfullyMessage();
+
+     //   dialogContentElements.validateCountrySuccessfullyMessage();
     }
 
 

@@ -46,7 +46,7 @@ public class LoginPage extends BasePOM{
         wait.until(ExpectedConditions.elementToBeClickable(acceptCookiesBtn)).click();
         wait.until(ExpectedConditions.visibilityOf(usernameInput)).sendKeys(username);
         passwordInput.sendKeys(password);
-        loginButton.click();
+        waitUntilVisibleAndClickableThenClick(loginButton);
     }
 
     public void validateUserSuccessfullyLoggedIn(){

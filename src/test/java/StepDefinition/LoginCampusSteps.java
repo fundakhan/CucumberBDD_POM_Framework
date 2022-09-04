@@ -1,5 +1,6 @@
 package StepDefinition;
 
+import POM.DialogContentElements;
 import POM.LoginPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -7,13 +8,14 @@ import io.cucumber.java.en.When;
 
 public class LoginCampusSteps {
 
-    LoginPage loginPage;
+   LoginPage loginPage;
 
     @Given("User is on login page")
     public void user_is_on_login_page() {
 
-     loginPage = new LoginPage();
-     loginPage.validateUserOnLoginPage();
+
+        loginPage = new LoginPage();
+        loginPage.validateUserOnLoginPage();
 
     }
     @When("user enter admin credentials")
