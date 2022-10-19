@@ -1,6 +1,7 @@
 package POM;
 
 import Utils.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -75,6 +76,7 @@ public class DialogContentElements extends BasePOM{
     }
 
     public void validateSuccessfullyMessage(){
+      // wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'successfully')]")));
         wait.until(ExpectedConditions.visibilityOf(successMessage));
         Assert.assertTrue(successMessage.getText().contains("success".toLowerCase()));
 
@@ -147,6 +149,7 @@ public class DialogContentElements extends BasePOM{
 
         searchInput.sendKeys(existingFeeName);
         searchButton.click();
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("tbody[role='rowgroup']>tr"), 1));
         editButton.click();
         nameInput.clear();
         nameInput.sendKeys(newFeeName);
@@ -158,8 +161,9 @@ public class DialogContentElements extends BasePOM{
 
         searchInput.sendKeys(FeeName);
         searchButton.click();
-        Driver.wait(3);
-        waitUntilVisibleAndClickableThenClick(trashBtn);
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("tbody[role='rowgroup']>tr"), 1));
+        //Driver.wait(3);
+        trashBtn.click();
         waitUntilVisibleAndClickableThenClick(deleteBtnTwo);
 
 
