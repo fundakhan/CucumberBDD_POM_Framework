@@ -11,7 +11,7 @@ import java.time.Duration;
 public class BasePOM {
 
     WebDriver driver = Driver.getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
     public void waitUntilVisibleAndClickableThenClick(WebElement element){
 
