@@ -57,6 +57,9 @@ public class DialogContentElements extends BasePOM{
     @FindBy(xpath = "//ms-integer-field[@formcontrolname='priority']//input")
     private WebElement priorityInput;
 
+    @FindBy(xpath = "//span[@class='mat-slide-toggle-bar']")
+    private WebElement activeButton;
+
 
 
     private String country = "America";
@@ -142,7 +145,7 @@ public class DialogContentElements extends BasePOM{
         priorityInput.clear();
         priorityInput.sendKeys(priority);
         nameInput.click();
-        waitUntilVisibleAndClickableThenClick(saveButton);
+        waitUntilVisibleAndClickableThenClick(activeButton);
 
     }
 
