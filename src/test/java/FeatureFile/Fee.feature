@@ -12,9 +12,9 @@ Then Success message should be displayed
 
 Examples:
 | name          | code    | intCode     | priority |
-| FundaTest1    | fnd45   | paypal55    | 250      |
-| FundaTest2    | fnd456  | applePay55  | 150      |
-| FundaTest5    | fnd55   | googlePay55 | 650      |
+| FundaTest1    | fnd45   | paypal55    | 255      |
+| FundaTest2    | fnd456  | applePay55  | 155      |
+| FundaTest5    | fnd55   | googlePay55 | 655      |
 
 @Smoke
   Scenario Outline: Edit Fees

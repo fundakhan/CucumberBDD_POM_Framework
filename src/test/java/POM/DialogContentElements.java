@@ -87,7 +87,7 @@ public class DialogContentElements extends BasePOM{
     public void userEditCountry(){
         searchInput.sendKeys(country);
         searchButton.click();
-        editButton.click();
+       waitUntilVisibleAndClickableThenClick(editButton);
         nameInput.clear();
         nameInput.sendKeys(editCountry);
         codeInput.clear();
@@ -116,7 +116,7 @@ public class DialogContentElements extends BasePOM{
 
         searchInput.sendKeys(name);
         searchButton.click();
-        editButton.click();
+        waitUntilVisibleAndClickableThenClick(editButton);
         nameInput.clear();
         nameInput.sendKeys(updateName);
         shortName.clear();
@@ -141,7 +141,8 @@ public class DialogContentElements extends BasePOM{
         integrationCode.sendKeys(intCode);
         priorityInput.clear();
         priorityInput.sendKeys(priority);
-        saveButton.click();
+        nameInput.click();
+        waitUntilVisibleAndClickableThenClick(saveButton);
 
     }
 
