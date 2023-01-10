@@ -48,7 +48,7 @@ public class Driver {
         if (driver != null){
             driver.quit();
             driver = null; // if we don't have this line next scenario will fail
-                           // after driver.quit we need to set driver object to null
+                           // after driver.quit we need to set driver object equal to null
         }
 
     }
